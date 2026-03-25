@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: hosting-bot-api
+    runtime: image
+    image:
+      url: ghcr.io/deplyapp/hosting-bot:latest
+    envVars:
+      - key: SERVICE
+        value: api
+      - key: PORT
+        value: 8080
+      - key: DATABASE_URL
+        sync: false
+      - key: NODE_ENV
+        value: production
+    healthCheckPath: /health
+
+  - type: worker
+    name: hosting-bot-tg
+    runtime: image
+    image:
+      url: ghcr.io/deplyapp/hosting-bot:latest
+    envVars:
+      - key: SERVICE
+        value: bot
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: NODE_ENV
+        value: production
