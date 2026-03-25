@@ -1,0 +1,12 @@
+node_modules
+**/node_modules
+**/dist
+**/.cache
+.git
+.gitignore
+.env
+.env.*
+*.md
+artifacts/mockup-sandbox
+artifacts/projects
+.local
