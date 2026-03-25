@@ -1,0 +1,33 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE: api
+    ports:
+      - "8080:8080"
+    environment:
+      SERVICE: api
+      PORT: "8080"
+      DATABASE_URL: ${DATABASE_URL}
+      NODE_ENV: production
+    restart: unless-stopped
+
+  bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE: bot
+    environment:
+      SERVICE: bot
+      BOT_TOKEN: ${BOT_TOKEN}
+      DATABASE_URL: ${DATABASE_URL}
+      NODE_ENV: production
+    volumes:
+      - projects_data:/app/artifacts/projects
+    restart: unless-stopped
+
+volumes:
+  projects_data:
